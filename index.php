@@ -1,0 +1,37 @@
+<?php
+/**
+ * Main package of this app - include all need files
+ *
+ * @package index
+ * @author ZUBER Lionel <lionel.zuber@armaklan.org>
+ * @version 0.1
+ * @copyright (C) 2013 ZUBER Lionel <lionel.zuber@armaklan.org>
+ * @license BSD
+ */
+
+require __DIR__.'/vendor/autoload.php';
+
+require __DIR__.'/src/app/app.php';
+require __DIR__.'/src/conf/config.php';
+require __DIR__.'/src/app/service.php';
+require __DIR__.'/src/app/controller.php';
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views',
+));
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+
+$mustBeLogged = function (Request $request) use ($app) {
+	if (!isLog($app)) {
+		$url =  str_replace('/', '!', $request->getUri());
+		return $app->redirect($app->path('login_page', array('url' =>  $url)));
+	}
+};
+
+function isLog($app) {
+	return ($app['session']->get('user') != null);
+}
+
+Request::enableHttpMethodParameterOverride();
+$app->run();

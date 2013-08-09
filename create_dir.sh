@@ -1,0 +1,10 @@
+mkdir src
+mkdir src/views/
+mkdir src/conf/
+mkdir src/app/
+mkdir src/controller/
+mkdir src/service/
+mkdir resource/
+mkdir resource/img/
+mkdir resource/js/
+mkdir resource/css/
