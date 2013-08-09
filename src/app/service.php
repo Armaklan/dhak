@@ -6,7 +6,7 @@
  * @author ZUBER Lionel <lionel.zuber@armaklan.org>
  * @version 0.1
  * @copyright (C) 2013 ZUBER Lionel <lionel.zuber@armaklan.org>
- * @license BSD
+ * @license MIT
  */
 
 $app['topicService'] = function ($app) {
