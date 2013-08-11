@@ -9,6 +9,9 @@
  * @license MIT
  */
 
+
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
+
 $app["debug"] = true;
 
 // Base de donnée
@@ -16,7 +19,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
             'driver'    => 'pdo_mysql',
             'host'      => 'localhost',
-            'dbname'    => 'jdRoll',
+            'dbname'    => 'dhak',
             'user'      => 'root',
             'password'  => '',
             'charset'   => 'utf8',
@@ -45,7 +48,7 @@ $app['mailer'] = \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance())
 
 // Logger
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
-		'monolog.logfile' => __DIR__.'/development.log',
+		'monolog.logfile' => __DIR__.'/../../log/development.log',
 ));
 
 ?>

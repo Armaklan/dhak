@@ -1,0 +1,28 @@
+{% extends "squelette.html.twig" %}
+
+{% block content %}
+
+	<div style="margin-top: 3em"></div>
+	<form class="form-horizontal" action="{{ path('login_save')  }}" method="POST">
+	    <div class="control-group">
+		    <label class="control-label" for="login">Nom d'utilisateur</label>
+		    <div class="controls">
+		    	<input type="text" id="login" name="login" placeholder="Nom d'utilisateur">
+		    </div>
+	    </div>
+	    <div class="control-group">
+		    <label class="control-label" for="pass">Mot de passe</label>
+		    <div class="controls">
+		    	<input type="password" id="pass" name="pass" placeholder="Mot de passe">
+		    </div>
+	    </div>
+	    <input type="hidden" name="url" value="{{ url }}" />
+
+	    <div class="control-group">
+		    <div class="controls">
+			    <button type="submit" class="btn">Se connecter</button>
+		    </div>
+	    </div>
+    </form>
+
+{% endblock %}

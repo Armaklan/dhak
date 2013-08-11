@@ -9,8 +9,10 @@
  * @license MIT
  */
 
-$app['topicService'] = function ($app) {
-	return new TopicService($app['db'], $app['session'], $app['monolog']);
+require __DIR__.'/../service/userService.php';
+
+$app['userService'] = function ($app) {
+	return new UserService($app['db'], $app['session'], $app['monolog']);
 };
 
 ?>
