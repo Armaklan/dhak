@@ -83,7 +83,13 @@ class UserService {
 	}
 
 	public function getList() {
-		$sql = "SELECT * FROM user";
+		$sql = "SELECT * FROM user WHERE profil = 'Chef' or profil='Assistant'";
+		$users = $this->db->fetchAll($sql, array());
+		return $users;
+	}
+
+	public function getFormations() {
+		$sql = "SELECT * FROM formation ORDER BY lvl"; 
 		$users = $this->db->fetchAll($sql, array());
 		return $users;
 	}
@@ -121,13 +127,15 @@ class UserService {
 		$user['adresse'] = $request->get("inputAdresse");
 		$user['cp'] = $request->get("inputCP");
 		$user['city'] = $request->get("inputCity");
+		$user['profil'] = $request->get("inputProfil");
+		$user['formation_lvl'] = $request->get("inputFormation");
 		return $user;
 	}
 
 	public function createUser($user) {
-		$sql = "INSERT INTO user (username, long_name, mail, city, post_code, adresse, tel)
+		$sql = "INSERT INTO user (username, long_name, mail, city, post_code, adresse, tel, profil, formation_lvl)
 			VALUES
-			(:username, :longName, :mail, :city, :postCode, :adresse, :tel) ";
+			(:username, :longName, :mail, :city, :postCode, :adresse, :tel, :profil, :formation_lvl) ";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue("username", $user['username']);
 		$stmt->bindValue("longName", $user['longName']);
@@ -136,6 +144,8 @@ class UserService {
 		$stmt->bindValue("postCode", $user['cp']);
 		$stmt->bindValue("adresse", $user['adresse']);
 		$stmt->bindValue("tel", $user['tel']);
+		$stmt->bindValue("profil", $user['profil']);
+		$stmt->bindValue("formation_lvl", $user['formation_lvl']);
 		$stmt->execute();
 
 		return $this->db->lastInsertId();
@@ -150,7 +160,9 @@ class UserService {
 			city = :city,
 			post_code = :postCode,
 			adresse = :adresse,
-			tel = :tel
+			tel = :tel,
+			profil = :profil,
+			formation_lvl = :formation_lvl
 			WHERE id = :id
 			";
 			
@@ -163,6 +175,8 @@ class UserService {
 		$stmt->bindValue("postCode", $user['cp']);
 		$stmt->bindValue("adresse", $user['adresse']);
 		$stmt->bindValue("tel", $user['tel']);
+		$stmt->bindValue("profil", $user['profil']);
+		$stmt->bindValue("formation_lvl", $user['formation_lvl']);
 		$stmt->execute();
 	}
 }
