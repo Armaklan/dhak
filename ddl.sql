@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS user (
   tel varchar(14) NOT NULL,
   profil VARCHAR(10) DEFAULT NULL,
   formation_lvl int(10) DEFAULT NULL,
+  commentaire LONGTEXT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY (username)
 );

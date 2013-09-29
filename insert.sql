@@ -182,3 +182,5 @@ INSERT INTO formation VALUES ('0', 'Non-Formé', '');
 INSERT INTO formation VALUES ('1', 'Attestation de capacité', 'AC');
 INSERT INTO formation VALUES ('2', 'CEP1', 'CEP1');
 INSERT INTO formation VALUES ('3', 'CEP2', 'CEP2');
+INSERT INTO formation VALUES ('4', 'SENAMCO 1', 'SECO1');
+INSERT INTO formation VALUES ('5', 'SENAMCO 2', 'SECO2');

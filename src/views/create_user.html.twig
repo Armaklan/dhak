@@ -1,0 +1,86 @@
+{% extends "squelette.html.twig" %}
+
+{% block content %}
+		  <form class="form-horizontal" action="{{path('save_user')}}" id="newChefForm" method="POST">
+			  <div class="control-group">
+				<label class="control-label" for="inputName">Nom</label>
+				<div class="controls">
+				  <input type="text" name="inputName" placeholder="Nom complet">
+				  <input type="hidden" name="inputId" value="0">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputEmail">Email</label>
+				<div class="controls">
+				  <div class="input-append">
+					<span class="add-on">@</span>
+				  	<input type="text" name="inputEmail" placeholder="Email" class="input-medium">
+				  </div>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputTel">Téléphone</label>
+				<div class="controls">
+				  <div class="input-append">
+					<span class="add-on"><i class="icon-phone"></i> </span>
+				  	<input type="text" name="inputTel" placeholder="Numéro de téléphone" class="input-medium">
+				  </div>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputAdresse">Adresse</label>
+				<div class="controls">
+				  <input type="text" name="inputAdresse" placeholder="N°, Voie, ...">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputCity">Ville</label>
+				<div class="controls">
+				  <input type="text" name="inputCP" placeholder="CP" class="input-mini">
+				  <input type="text" name="inputCity" placeholder="Ville" class="input-large">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputProfil">Profil</label>
+				<div class="controls">
+					<select name="inputFormation">
+						{% for profil in profils %}
+						<option value="{{profil.name}}">
+							{{profil.name}}
+						</option>>
+						{% endfor %}
+					</select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputFormation">Formation</label>
+				<div class="controls">
+					<select name="inputFormation">
+						{% for formation in formations %}
+						<option value="{{formation.lvl}}" {% if formation.lvl == 0 %} selected {% endif %}>
+							{{formation.name}}
+						</option>>
+						{% endfor %}
+					</select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputUnites">Droit d'accès</label>
+				<div class="controls">
+					<select class="selectpicker" data-live-search="true" name="inputUnites[]" multiple="true">
+						{% for unite in unites %}
+						<option value="{{unite.unite_id}}" >
+							{{ unite.province_name }} - {{ unite.district_name}} - {{unite.groupe_name}}
+						</option>>
+						{% endfor %}
+					</select>
+				</div>
+			  </div>
+		   		<input type="hidden" name="inputCommentaire" rows="10" class="popupTextarea"></textarea>
+			  <div class="control-group">
+				<div class="controls">
+					<input type="submit" class="btn btn-primary" value="Creer l'utilisateur">
+				</div>
+			  </div>
+		</form>
+{% endblock %}

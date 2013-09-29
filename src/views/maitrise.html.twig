@@ -42,31 +42,31 @@
 				</th>
 				<tr class="info">
 					<td>Actuel</td>
-					<td><INPUT type="text" value="0" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="1" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="1" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="2" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.actual.3}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.actual.2}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.actual.1}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.actual.0}}" class="input-mini" readonly="true"></td>
 				</tr>
-				<tr>
+				<tr {% if not requirement.currentReqChecked %} class="error" {% endif %}>
 					<td>Année</td>
-					<td><INPUT type="text" value="0" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="2" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="2" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="4" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.currentReq.3}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.currentReq.2}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.currentReq.1}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.currentReq.0}}" class="input-mini" readonly="true"></td>
 				</tr>
-				<tr class="error">
+				<tr {% if not requirement.shortActReqChecked %} class="error" {% endif %}>
 					<td>Camp < 5j </td>
-					<td><INPUT type="text" value="0" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="1" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="3" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="4" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.shortActReq.3}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.shortActReq.2}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.shortActReq.1}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.shortActReq.0}}" class="input-mini" readonly="true"></td>
 				</tr>
-				<tr class="error">
+				<tr {% if not requirement.longActReqChecked %} class="error" {% endif %}>
 					<td>Camp >= 5j</td>
-					<td><INPUT type="text" value="1" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="2" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="1" class="input-mini" readonly="true"></td>
-					<td><INPUT type="text" value="4" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.longActReq.3}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.longActReq.2}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.longActReq.1}}" class="input-mini" readonly="true"></td>
+					<td><INPUT type="text" value="{{requirement.longActReq.0}}" class="input-mini" readonly="true"></td>
 				</tr>
 			</table>
 		</div>
@@ -112,6 +112,7 @@
 						<input type="hidden" value="{{chef.post_code}}" class="cp">
 						<input type="hidden" value="{{chef.profil}}" class="profil">
 						<input type="hidden" value="{{chef.formation_lvl}}" class="formation">
+						<input type="hidden" value="{{chef.commentaire}}" class="commentaire">
 
 						<td>{% if chef.profil == 'Chef' %} <i class="icon-certificate">{% endif %}</td>
 						<td>{{ chef.long_name}}</td>
@@ -198,6 +199,12 @@
 					</select>
 				</div>
 			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputCommentaire">Commentaire</label>
+				<div class="controls">
+					<textarea name="inputCommentaire" rows="10" class="popupTextarea"></textarea>
+				</div>
+			  </div>
 		</form>
   </div>
   <div class="modal-footer">
@@ -267,6 +274,12 @@
 						</option>>
 						{% endfor %}
 					</select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputCommentaire">Commentaire</label>
+				<div class="controls">
+					<textarea name="inputCommentaire" rows="10" class="popupTextarea"></textarea>
 				</div>
 			  </div>
 		</form>

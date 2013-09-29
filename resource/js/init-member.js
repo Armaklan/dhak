@@ -10,6 +10,7 @@ function initMember(user) {
 	cp = $(user).children(".cp").val();
 	profil = $(user).children(".profil").val();
 	formation = $(user).children(".formation").val();
+	commentaire = $(user).children(".commentaire").val();
 	
 	popup = $('#updateUserModal');
 	popup.find("input[name$=inputName]").val(long_name);
@@ -19,6 +20,7 @@ function initMember(user) {
 	popup.find("input[name$=inputAdresse]").val(adresse);
 	popup.find("input[name$=inputCity]").val(city);
 	popup.find("input[name$=inputCP]").val(cp);
+	popup.find("textarea[name$=inputCommentaire]").val(commentaire);
 	popup.find("input[name$=inputProfil]").prop('checked', false);
 	popup.find("input[value='" + profil + "']").prop('checked', true);
 

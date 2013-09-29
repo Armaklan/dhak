@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-select.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-responsive.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/style.css">
 
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/jquery-2.0.3.min.js"> </script>
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootstrap.min.js"> </script>
@@ -45,10 +46,17 @@
               <li class="dropdown">
               	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-play-circle"></i> Maitrise<b class="caret"></b></a>
               	<ul class="dropdown-menu">
-              		<li><a href="{{ path('maitrise_synthese') }}">Saisir ma maitrise campagnes</a></li>
-                    <li class="divider"></li>
+              		<li><a href="{{ path('maitrise_synthese') }}">Saisir ma maitrise</a></li>
               	</ul>
               </li>
+			  {% if app.session.get('user') != null and app.session.get('user').profil == "ACPRL" %}
+              <li class="dropdown">
+              	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i> Administration<b class="caret"></b></a>
+              	<ul class="dropdown-menu">
+              		<li><a href="{{ path('create_user') }}">Creer un utilisateur</a></li>
+              	</ul>
+
+			  {% endif %}
             </ul>
             <ul class="nav pull-right">
                 <li>
