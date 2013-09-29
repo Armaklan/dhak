@@ -10,9 +10,13 @@
  */
 
 require __DIR__.'/../service/userService.php';
+require __DIR__.'/../service/uniteService.php';
 
 $app['userService'] = function ($app) {
 	return new UserService($app['db'], $app['session'], $app['monolog']);
+};
+$app['uniteService'] = function ($app) {
+	return new UniteService($app['db'], $app['session'], $app['monolog']);
 };
 
 ?>

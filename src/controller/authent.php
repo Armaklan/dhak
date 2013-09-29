@@ -32,6 +32,9 @@ $authentController->post('/login', function(Request $request) use($app) {
 
     try {
         $app["userService"]->login($login, $password);
+		$accessibleUnite = $app['userService']->getAccessibleUnite($app['session']->get('user')['id']);
+		$preSelectedUnite = $accessibleUnite[0]['unite_id'];
+		$app['session']->set('selectedUnite', $preSelectedUnite);
     } catch (Exception $e) {
         $app["session"]->getFlashBag()->add('error', $e->getMessage());
         return $app->render('login.html.twig', ['url' => $url]);

@@ -37,5 +37,4 @@ function isLog($app) {
 
 require __DIR__.'/src/app/service.php';
 require __DIR__.'/src/app/controller.php';
-Request::enableHttpMethodParameterOverride();
 $app->run();

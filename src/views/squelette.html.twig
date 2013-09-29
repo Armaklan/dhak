@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<title>jdRoll</title>
+	<title>Dhak</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +9,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{app.request.baseUrl}}/resource/favicon.ico">
 
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-select.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-responsive.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/font-awesome.min.css">
 
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/jquery-2.0.3.min.js"> </script>
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootstrap.min.js"> </script>
+	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootbox.min.js"> </script>
+	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/init-member.js"> </script>
+	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootstrap-select.min.js"> </script>
 
 	{% block specificHeader %}
 
@@ -41,7 +45,7 @@
               <li class="dropdown">
               	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-play-circle"></i> Maitrise<b class="caret"></b></a>
               	<ul class="dropdown-menu">
-              		<li><a href="{{ path('homepage') }}">Saisir ma maitrise campagnes</a></li>
+              		<li><a href="{{ path('maitrise_synthese') }}">Saisir ma maitrise campagnes</a></li>
                     <li class="divider"></li>
               	</ul>
               </li>
@@ -68,12 +72,12 @@
 	<div class="container-fluid" style="margin-top: 4em;">
 
 	    <div class="row-fluid">
-            <div class="span3">
+            <div class="span2">
                 {% block sidebar %}
 
                 {% endblock %}
             </div>
-            <div class="span9">
+            <div class="span10">
                 {% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'error'] %}
                 {% if app.session.flashBag is defined %}
                     {%- for alertType in alertTypeAvaillable %}
@@ -100,6 +104,9 @@
 	{% endblock %}
 
     <script>
+
+		$('.selectpicker').selectpicker();
+
     	function filterTable(idFilter, idTable) {
         	searchText = $(idFilter).val().toLowerCase();
 			$(idTable + " tr ").each(function(i){
