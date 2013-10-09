@@ -30,7 +30,9 @@ class UniteService {
 					groupe.name as groupe_name, 
 					district.name as district_name,
 					province.name as province_name,
-					unite.size as size
+					unite.size as size,
+					unite.nb_sizaine as nb_sizaine,
+					unite.commentaire as commentaire
 				FROM unite 
 				JOIN branche
 				ON unite.branche_id = branche.id
@@ -79,14 +81,18 @@ class UniteService {
 		$stmt->execute();
 	}
 
-	public function updateSize($idUnite, $size) {
+	public function updateSize($idUnite, $size, $nbSizaine, $commentaire) {
 		$sql = "UPDATE unite
-				SET size = :size
+				SET size = :size,
+				nb_sizaine = :nb_sizaine,
+				commentaire = :commentaire
 				WHERE
 				id = :unite";
 
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue("size", $size);
+		$stmt->bindValue("nb_sizaine", $nbSizaine);
+		$stmt->bindValue("commentaire", $commentaire);
 		$stmt->bindValue("unite", $idUnite);
 		$stmt->execute();
 	}

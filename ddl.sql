@@ -89,3 +89,6 @@ CREATE TABLE formation (
 
 ALTER TABLE  `user` ADD  `firstname` VARCHAR( 200 ) NULL AFTER  `long_name` ,
 ADD  `birthday` DATE NULL AFTER  `firstname` ;
+
+ALTER TABLE  `unite` ADD  `nb_sizaine` INT NULL ,
+ADD  `commentaire` LONGTEXT NULL ;

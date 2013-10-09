@@ -74,7 +74,9 @@ $maitriseController->post('/update', function(Request $request) use($app) {
 $maitriseController->post('/size', function(Request $request) use($app) {
 	$idUnite = $request->get('id');
 	$size = $request->get('size');
-	$app['uniteService']->updateSize($idUnite, $size);
+	$nbSizaine = $request->get('nb_sizaine');
+	$commentaire = $request->get('commentaire');
+	$app['uniteService']->updateSize($idUnite, $size, $nbSizaine, $commentaire);
     return $app->redirect($app->path('maitrise_synthese', array()));
 })->bind('unite_modif_size');
 
