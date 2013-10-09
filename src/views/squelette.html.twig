@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-select.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/bootstrap-responsive.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/datepicker.css" type="text/css" media="all">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{app.request.baseUrl}}/resource/css/style.css">
 
@@ -19,6 +20,7 @@
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootbox.min.js"> </script>
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/init-member.js"> </script>
 	<script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootstrap-select.min.js"> </script>
+    <script type="text/javascript" src="{{app.request.baseUrl}}/resource/js/bootstrap-datepicker.js"> </script>
 
 	{% block specificHeader %}
 
@@ -148,6 +150,26 @@
 
     </script>
 
+	<script>
+    
+        $(function () { 
+
+        var nowTemp = new Date();
+        var startDate = new Date(nowTemp.getFullYear()-90, 12, 0, 0, 0, 0, 0);
+		var endDate = new Date(nowTemp.getFullYear()-10, 12, 0, 0, 0, 0, 0);
+
+        var dp = $('.birthdayPicker').datepicker({
+				autoClose: true,
+				format: 'dd/mm/yyyy',
+				forceParse: true,
+			}).on('changeDate', function(ev) {
+			  dp.hide();
+        }).data('datepicker');
+		dp.setEndDate(endDate);
+		dp.setStartDate(startDate);
+		
+    });
+	</script>
     <a name="bottom"></a>
 </body>
 </html>

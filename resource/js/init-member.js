@@ -3,6 +3,8 @@ function initMember(user) {
 
 	id = $(user).children(".id").val();
 	long_name = $(user).children(".long_name").val();
+	first_name = $(user).children(".firstname").val();
+	birthday = $(user).children(".birthday").val();
 	mail = $(user).children(".mail").val();
 	tel = $(user).children(".tel").val();
 	adresse = $(user).children(".adresse").val();
@@ -14,6 +16,8 @@ function initMember(user) {
 	
 	popup = $('#updateUserModal');
 	popup.find("input[name$=inputName]").val(long_name);
+	popup.find("input[name$=inputFirstName]").val(first_name);
+	popup.find("input[name$=inputBirthday]").val(birthday);
 	popup.find("input[name$=inputId]").val(id);
 	popup.find("input[name$=inputEmail]").val(mail);
 	popup.find("input[name$=inputTel]").val(tel);

@@ -87,3 +87,5 @@ CREATE TABLE formation (
 	UNIQUE KEY(name)
 );
 
+ALTER TABLE  `user` ADD  `firstname` VARCHAR( 200 ) NULL AFTER  `long_name` ,
+ADD  `birthday` DATE NULL AFTER  `firstname` ;

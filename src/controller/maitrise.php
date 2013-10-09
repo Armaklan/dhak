@@ -86,7 +86,7 @@ $maitriseController->get('/create_user', function(Request $request) use($app) {
 })->bind('create_user');
 
 $maitriseController->post('/save_user', function(Request $request) use($app) {
-	$user = $app['userService']->getUserFromRequest($request);
+	$user = $app['userService']->getUserAllFromRequest($request);
 	$idChef = $app['userService']->createUser($user);
 	$unites = $request->get("inputUnites");
 	$app['monolog']->addDebug("Unite : " . $unites);
@@ -139,10 +139,10 @@ class UniteRequirement{
 		$this->shortActReq[3] = 0;
 		$this->shortActReq[2] = 0;
 		$this->shortActReq[1] = 1;
-		$this->shortActReq[0] = ((int) ($size / 6)) + 1;
+		$this->shortActReq[0] = ((int) (($size - 1) / 6)) + 1;
 		if($size > 12) {
 			$this->shortActReq[1] = 0;
-			$this->shortActReq[1] = 2;
+			$this->shortActReq[2] = 2;
 		}
 	}
 
@@ -150,7 +150,7 @@ class UniteRequirement{
 		$this->longActReq[3] = 1;
 		$this->longActReq[2] = 1;
 		$this->longActReq[1] = 0;
-		$this->longActReq[0] = ((int) ($size / 6)) + 2;
+		$this->longActReq[0] = ((int) (($size - 1) / 6)) + 2;
 		if($size > 12) {
 			$this->longActReq[1] = 1;
 		}

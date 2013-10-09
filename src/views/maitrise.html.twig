@@ -105,6 +105,8 @@
 
 						<input type="hidden" value="{{chef.id}}" class="id">
 						<input type="hidden" value="{{chef.long_name}}" class="long_name">
+						<input type="hidden" value="{{chef.firstname}}" class="firstname">
+						<input type="hidden" value="{{chef.birthday}}" class="birthday">
 						<input type="hidden" value="{{chef.mail}}" class="mail">
 						<input type="hidden" value="{{chef.tel}}" class="tel">
 						<input type="hidden" value="{{chef.adresse}}" class="adresse">
@@ -147,6 +149,21 @@
 				<div class="controls">
 				  <input type="text" name="inputName" placeholder="Nom complet">
 				  <input type="hidden" name="inputId" value="0">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputFirstName">Prénom</label>
+				<div class="controls">
+				  <input type="text" name="inputFirstName" placeholder="Prénom">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputBirthday">Date d'anniversaire</label>
+				<div class="controls">
+					<div class="input-append date birthdayPicker">
+						<input name="inputBirthday" class="span2" size="160" type="text" value="" readonly>
+						<span class="add-on"><i class="icon-th"></i></span>
+					</div>
 				</div>
 			  </div>
 			  <div class="control-group">
@@ -224,6 +241,21 @@
 				<div class="controls">
 				  <input type="text" name="inputName" placeholder="Nom complet">
 				  <input type="hidden" name="inputId">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputFirstName">Prénom</label>
+				<div class="controls">
+				  <input type="text" name="inputFirstName" placeholder="Prénom">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="inputBirthday">Date d'anniversaire</label>
+				<div class="controls">
+					<div class="input-append date birthdayPicker">
+						<input name="inputBirthday" class="span2" size="160" type="text" value="" readonly>
+						<span class="add-on"><i class="icon-th"></i></span>
+					</div>
 				</div>
 			  </div>
 			  <div class="control-group">

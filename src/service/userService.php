@@ -124,7 +124,7 @@ class UserService {
 	}
 
 	public function getAllUnite() {
-		$sql = "SELECT 
+		$sql = "SELECT DISTINCT
 					branche.name as branche_name, 
 					groupe.name as groupe_name, 
 					district.name as district_name,
@@ -158,8 +158,29 @@ class UserService {
 
 	public function getUserFromRequest($request) {
 		$user['longName'] = $request->get("inputName");
+		$user['firstname'] = $request->get("inputFirstName");
+		$user['birthday'] = $request->get("inputBirthday");
 		$user['id'] = $request->get("inputId");
 		$user['username'] = str_replace(' ', '', $request->get("inputName"));
+		$user['password'] = "";
+		$user['mail'] = $request->get("inputEmail");
+		$user['tel'] = $request->get("inputTel");
+		$user['adresse'] = $request->get("inputAdresse");
+		$user['cp'] = $request->get("inputCP");
+		$user['commentaire'] = $request->get("inputCommentaire");
+		$user['city'] = $request->get("inputCity");
+		$user['profil'] = $request->get("inputProfil");
+		$user['formation_lvl'] = $request->get("inputFormation");
+		return $user;
+	}
+
+	public function getUserAllFromRequest($request) {
+		$user['longName'] = $request->get("inputName");
+		$user['firstname'] = $request->get("inputFirstName");
+		$user['birthday'] = $request->get("inputBirthday");
+		$user['id'] = $request->get("inputId");
+		$user['username'] = $request->get("inputUsername");
+		$user['password'] = md5($request->get("inputPassword"));
 		$user['mail'] = $request->get("inputEmail");
 		$user['tel'] = $request->get("inputTel");
 		$user['adresse'] = $request->get("inputAdresse");
@@ -172,12 +193,17 @@ class UserService {
 	}
 
 	public function createUser($user) {
-		$sql = "INSERT INTO user (username, long_name, mail, city, post_code, adresse, tel, profil, commentaire, formation_lvl)
+		$sql = "INSERT INTO user (username, password, long_name, firstname, birthday, mail, city, 
+			post_code, adresse, tel, profil, commentaire, formation_lvl)
 			VALUES
-			(:username, :longName, :mail, :city, :postCode, :adresse, :tel, :profil, :commentaire, :formation_lvl) ";
+			(:username, :password, :longName, :firstname, STR_TO_DATE(:birthday, '%d/%m/%Y'), :mail, :city, 
+			:postCode, :adresse, :tel, :profil, :commentaire, :formation_lvl) ";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue("username", $user['username']);
+		$stmt->bindValue("password", $user['password']);
 		$stmt->bindValue("longName", $user['longName']);
+		$stmt->bindValue("firstname", $user['firstname']);
+		$stmt->bindValue("birthday", $user['birthday']);
 		$stmt->bindValue("mail", $user['mail']);
 		$stmt->bindValue("city", $user['city']);
 		$stmt->bindValue("postCode", $user['cp']);
@@ -196,6 +222,8 @@ class UserService {
 			UPDATE user
 			SET username = :username,
 			long_name = :longName,
+			firstname = :firstname,
+			birthday = STR_TO_DATE(:birthday, '%d/%m/%Y'),
 			mail = :mail,
 			city = :city,
 			post_code = :postCode,
@@ -211,6 +239,8 @@ class UserService {
 		$stmt->bindValue("id", $user['id']);
 		$stmt->bindValue("username", $user['username']);
 		$stmt->bindValue("longName", $user['longName']);
+		$stmt->bindValue("firstname", $user['firstname']);
+		$stmt->bindValue("birthday", $user['birthday']);
 		$stmt->bindValue("mail", $user['mail']);
 		$stmt->bindValue("city", $user['city']);
 		$stmt->bindValue("postCode", $user['cp']);
