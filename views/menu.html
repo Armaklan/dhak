@@ -22,13 +22,12 @@
               <li><a href="#/unite/list">Saisir ma maitrise</a></li>
             </ul>
           </li>
-          <li class="dropdown">
+          <li class="dropdown" ng-show="user.username == 'aszuber' ">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="fa fa-cogs"></span> Administration <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#/user/list">Administrer les utilisateurs</a></li>
-              <li><a href="#/user/create">Créer un utilisateur</a></li>
+              <li><a href="#/user/list">Utilisateurs</a></li>
             </ul>
           </li>
         </ul>
@@ -38,7 +37,6 @@
               <span class="fa fa-user"></span> <span ng-bind="user.username"></span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#/profil">Editer mon profil</a></li>
               <li><a ng-click="logout()">Se déconnecter</a></li>
             </ul>
           </li>

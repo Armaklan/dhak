@@ -324,12 +324,13 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 		}
 	);
 
-	if($routeParams.id != 0) {
+	if($routeParams.id != "0") {
 		AuthentService.get({id: $routeParams.id},function(data) {
 			$scope.chef = data;
 		});
 	} else {
 		$scope.chef = {
+		  id: 0,
 		  long_name : "",
 	      firstname : "",
 	      post_code : "",
@@ -347,12 +348,16 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 	}
 
 
-	$scope.ok = function() {
+	$scope.create_or_update = function() {
 		if($scope.chef.id != 0) {
 			AuthentService.update($scope.chef);
 		} else {
 			AuthentService.create($scope.chef);
 		}
+	}
+
+	$scope.ok = function() {
+		$scope.create_or_update();
 		$location.path("/user/list");
 	}
 
@@ -361,6 +366,7 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 	}
 
 	$scope.ok_right = function() {
+		$scope.create_or_update();
 		AuthentService.update_right({
 			user:$scope.chef.id,
 			unites:$scope.right

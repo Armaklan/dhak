@@ -216,7 +216,7 @@ class UserService {
 			:postCode, :adresse, :tel, :profil, :commentaire, :formation_lvl) ";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue("username", $user->username);
-		$stmt->bindValue("password", $user->password);
+		$stmt->bindValue("password", md5($user->password));
 		$stmt->bindValue("longName", $user->long_name);
 		$stmt->bindValue("firstname", $user->firstname);
 		$stmt->bindValue("birthday", $user->birthday);
