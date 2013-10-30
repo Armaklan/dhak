@@ -1,0 +1,64 @@
+<fieldset>
+	<legend>Composition de la maitrise</legend>
+	<table class="table table-striped table-hover">
+		<tr>
+			<th colspan="4">
+
+				<form class="form-inline" role="form">
+					<div class="form-group col-md-4">
+						<select class="form-control" ng-model="selected_chef">	
+							<option ng-repeat="chef in list_chef" value="{{chef.id}}">{{chef.long_name}}</option>	
+						</select>
+					</div>
+					<div class="form-group col-md-5">
+						<div class="input-append">
+							<button class="btn btn-default" ng-click="addChef()">
+								<span class="fa fa-link"></span> Ajouter
+							</button>
+							<a class="btn btn-primary" href="#userModal" role="button" data-toggle="modal">
+								<span class="fa fa-plus"></span> Nouveau chef
+							</a>
+						</div>
+					</div>
+				</form>
+				
+			</th>
+			<th>
+			</th>
+		</tr>
+		<tr>
+			<th></th>
+			<th>Nom</th>
+			<th>Formation</th>
+			<th>Coordonnée</th>
+			<td></th>
+		</tr>						
+		<tr ng-repeat="chef in maitrise">
+				<input type="hidden" value="{{chef.id}}" class="id">
+				<input type="hidden" value="{{chef.long_name}}" class="long_name">
+				<input type="hidden" value="{{chef.firstname}}" class="firstname">
+				<input type="hidden" value="{{chef.birthday}}" class="birthday">
+				<input type="hidden" value="{{chef.mail}}" class="mail">
+				<input type="hidden" value="{{chef.tel}}" class="tel">
+				<input type="hidden" value="{{chef.adresse}}" class="adresse">
+				<input type="hidden" value="{{chef.city}}" class="city">
+				<input type="hidden" value="{{chef.post_code}}" class="cp">
+				<input type="hidden" value="{{chef.profil}}" class="profil">
+				<input type="hidden" value="{{chef.formation_lvl}}" class="formation">
+				<input type="hidden" value="{{chef.commentaire}}" class="commentaire">
+
+				<td><div ng-show="chef.profil == 'Chef'"> <span class="fa fa-certificate"></span></div></td>
+				<td>{{ chef.long_name}}</td>
+				<td>{{ chef.formation_name }}</td>
+				<td>{{chef.adresse}}<br>{{chef.post_code}} {{chef.city}}</td>
+				<td>
+					<a class="btn btn-default" onClick="initMember('#user{{chef.id}}')" title="Editer">
+						<span class="fa fa-edit"></i> 
+					</a>
+					<a class="btn btn-danger" href="{{ path('maitrise_del', {idUser: chef.id}) }}" title="Détacher">
+						<span class="fa fa-chain-broken"></i> 
+					</a>
+				</td>
+			</tr>
+	</table>
+	</fieldset>

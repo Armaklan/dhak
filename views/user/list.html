@@ -1,0 +1,23 @@
+<table class="table table-striped table-hover">
+	<tr>
+		<th colspan="4" class="table-title">Liste des utilisateurs</th>
+	</tr>
+	<tr>
+		<th><a ng-click="sort = 'username'; reverse=!reverse">Nom d'utilisateur</a></th>
+		<th><a ng-click="sort = 'long_name'; reverse=!reverse">Nom de Famille</a></th>
+		<th><a ng-click="sort = 'firstname'; reverse=!reverse">Prénom</a></th>
+		<th><a ng-click="sort = 'profil'; reverse=!reverse">Profil</a></th>
+	</tr>
+	<tr>
+		<th><input ng-model="query.username"  class="form-control"/></th>
+		<th><input ng-model="query.long_name" class="form-control" /></th>
+		<th><input ng-model="query.firstname" class="form-control" /></th>
+		<th><input ng-model="query.profil" class="form-control" /></th>
+	</tr>
+	<tr ng-repeat="user in users | filter:query | orderBy:sort:reverse" ng-click="detail(user.id)">
+		<td>{{user.username}}</td>
+		<td>{{user.long_name}}</td>
+		<td>{{user.firstname}}</td>
+		<td>{{user.profil}}</td>
+	</tr>
+</table>

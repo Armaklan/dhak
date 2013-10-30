@@ -1,6 +1,10 @@
 # Composer directories
-vendor/*
-composer.lock
+api/vendor/*
+api/composer.lock
+api/log/*
+js/vendor/*
+*.sublime-project
+*.sublime-workspace
 
 # Temporary directory
 */logs/*

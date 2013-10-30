@@ -1,0 +1,30 @@
+<fieldset>
+	<legend>Information de l'unité</legend>
+	<form id="modifUniteSizeForm"  class="form-inline" role="form">
+		  <div class="row">
+			  <div class="form-group col-md-2">
+			    <label class="control-label" for="size">Nb d'enfants :</label>
+			    <input type="text" ng-model="unite.size" id="size" class="input-mini form-control" name="size">
+			  </div>
+			  <div class="form-group col-md-2 col-md-offset-1">
+			    <label class="control-label" for="nb_sizaine">Nb de sizaine :</label>
+			    <input type="text" ng-model="unite.nb_sizaine" id="nb_sizaine" class="input-mini form-control" name="size">
+			  </div>
+			  <div class="form-group col-md-2 col-md-offset-5">
+			  	<p>&nbsp;</p>
+				<button class="btn btn-default" ng-click="saveUnitModif()">
+					Enregistrer <span class="fa fa-save"></span>
+				</button>
+			   </div>
+		  </div>
+		  <div class="row">
+			  <div class="form-group col-md-12">
+			  	<label for="commentaire">Commentaire :</label>
+			  	<textarea name="commentaire" id="commentaire" style="min-height: 150px;" class="form-control" ng-model="unite.commentaire"></textarea>
+			  </div>
+		  </div>
+		  <div class="row">
+			
+		  </div>
+	</form>
+</fieldset>

@@ -1,0 +1,121 @@
+<div class="col-md-7" style="margin-top: 4em;">
+
+  <fieldset class="titled-box">
+  <legend>Données utilisateurs</legend>
+  <div class="pull-right">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+  <form class="form-horizontal" role="form">
+        <div class="form-group">      
+          <label class="col-md-2" for="inputName">Identifiant</label>
+          <div class="col-md-5">
+            <input class="form-control" type="text" ng-model="chef.username" placeholder="Nom d'utilisateur">
+          </div>
+          <div class="col-md-5" ng-show="chef.id == 0">
+            <input  class="form-control" type="text" ng-model="chef.password" placeholder="Mots de passe">
+          </div>
+        </div>
+        <div class="form-group">      
+          <label class="col-md-2" for="inputName">Identité</label>
+          <div class="col-md-5">
+            <input class="form-control" type="text" ng-model="chef.long_name" placeholder="Nom de famille">
+          </div>
+            <div class="col-md-5">
+            <input  class="form-control" type="text" ng-model="chef.firstname" placeholder="Prénom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputBirthday">Date de naissance</label>
+          <div class="col-md-10">
+              <div class="input-append date birthdayPicker">
+                  <input class="form-control" ng-model="chef.birthday" type="text" value="" datepicker-popup="dd/MM/yyyy" show-weeks="false">
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputEmail">Email</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon">@</span>
+              <input class="form-control" type="text" ng-model="chef.mail" placeholder="Email">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputTel">Téléphone</label>
+          <div class="col-md-10">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="fa fa-phone"></span></span>
+              <input class="form-control"  type="text" ng-model="chef.tel" placeholder="Numéro de téléphone">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputAdresse">Adresse</label>
+          <div class="col-md-10">
+            <input class="form-control" type="text"  ng-model="chef.adresse" placeholder="N°, Voie, ...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputCity">Ville</label>
+          <div class="col-md-3">
+            <input class="form-control" type="text" ng-model="chef.post_code" placeholder="CP" class="input-mini">
+          </div>
+          <div class="col-md-7">
+            <input class="form-control" type="text" ng-model="chef.city" placeholder="Ville" class="input-large">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2">Profil</label>
+          <div class="col-md-10">
+              <select class="form-control" 
+                ng-model="chef.profil" 
+                ng-options="profil.name as profil.name for profil in profils"
+                placeholder="Profil (CD, ACPRL, ...)"
+                >
+              </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputFormation">Formation</label>
+          <div class="col-md-10">
+              <select class="form-control" name="inputFormation" 
+              ng-model="chef.formation_lvl" 
+              ng-options="formation.lvl as formation.name for formation in formations"
+              >
+              </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2" for="inputCommentaire">Commentaire</label>
+          <div class="col-md-10">
+              <textarea class="form-control"  ng-model="chef.commentaire" rows="6" class="popupTextarea"></textarea>
+          </div>
+        </div>
+  </form>
+  </fieldset>
+</div>
+<div class="col-md-5" style="margin-top: 4em;">
+  <fieldset class="titled-box">
+    <legend>Droits d'accès</legend>
+    <div class="pull-right">
+      <button class="btn btn-default" ng-click="ok_right()">Modifier les droits</button>
+    </div>
+    <form class="form" role="form">
+          <div class="form-group">
+                <select class="form-control"
+                multiple="multiple"
+                ng-model="right" 
+                ui-select2 
+                ng-options="unite.unite_id as unite.branche_name + ' - ' + unite.province_name + ' - ' + unite.district_name + ' - ' + unite.groupe_name for unite in unites"
+                >
+                </select>
+          </div>
+          
+    </form>
+    <div ng-repeat="msg in msg_right" class="alert alert-success">
+      {{ msg }}
+    </div>
+  </fieldset>
+</div>

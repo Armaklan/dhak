@@ -1,0 +1,40 @@
+<table class="table table-striped table-condensed" id="synthese_maitrise">
+	<tr>
+		<th colspan="5" style="text-align: center">Maitrise requise</th>
+	</tr>
+	<tr>
+		<th></th>
+		<th>CEP2</th>
+		<th>CEP1</th>
+		<th>AC</th>
+		<th>Total</th>
+	</th>
+	<tr class="info">
+		<td>Actuel</td>
+		<td><div class="col-md-10 col-md-offset-1"><input type="text" value="{{currentRequirement.cep2}}" class="form-control"  readonly="true"></div></td>
+		<td><div class="col-md-10 col-md-offset-1"><input type="text" value="{{currentRequirement.cep1}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10 col-md-offset-1"><input type="text" value="{{currentRequirement.ac}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10 col-md-offset-1"><input type="text" value="{{currentRequirement.total}}" class="form-control" readonly="true"></div></td>
+	</tr>
+	<tr {% if not requirement.currentReqChecked %} class="error" {% endif %}>
+		<td>Année</td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.currentReq.3}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.currentReq.2}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.currentReq.1}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.currentReq.0}}" class="form-control" readonly="true"></div></td>
+	</tr>
+	<tr {% if not requirement.shortActReqChecked %} class="error" {% endif %}>
+		<td>Camp < 5j </td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.shortActReq.3}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.shortActReq.2}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.shortActReq.1}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.shortActReq.0}}" class="form-control" readonly="true"></div></td>
+	</tr>
+	<tr {% if not requirement.longActReqChecked %} class="error" {% endif %}>
+		<td>Camp >= 5j</td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.longActReq.3}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.longActReq.2}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.longActReq.1}}" class="form-control" readonly="true"></div></td>
+		<td><div class="col-md-10  col-md-offset-1"><input type="text" value="{{requirement.longActReq.0}}" class="form-control" readonly="true"></div></td>
+	</tr>
+</table>

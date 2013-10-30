@@ -1,0 +1,47 @@
+<header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Dhak</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#"><span class="fa fa-home"></span> Tableau de bord</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-play-circle"></span>  Maitrise <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/unite/list">Saisir ma maitrise</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-cogs"></span> Administration <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/user/list">Administrer les utilisateurs</a></li>
+              <li><a href="#/user/create">Créer un utilisateur</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="fa fa-user"></span> <span ng-bind="user.username"></span> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/profil">Editer mon profil</a></li>
+              <li><a ng-click="logout()">Se déconnecter</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </header>
