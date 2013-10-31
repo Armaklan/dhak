@@ -59,6 +59,7 @@ function UniteListCtrl($scope, $location, UniteService) {
 }
 
 function UniteCtrl($scope, $location, $routeParams, $modal, AuthentService, UniteService, UniteRequirementService) {
+	$scope.breadcrumb = "Modifier";
 	$scope.unite = {};
 	$scope.maitrise = [];
 	$scope.list_chef = [];
@@ -75,6 +76,7 @@ function UniteCtrl($scope, $location, $routeParams, $modal, AuthentService, Unit
 		{id: $routeParams.id},
 		function(data) {
 			$scope.unite = data;
+			$scope.breadcrumb = "Modifier " + data.branche_name + " - " + data.groupe_name;
 			$scope.currentRequirement = UniteRequirementService.calculCurrentRequirement(data);
 			$scope.shortRequirement = UniteRequirementService.calculShortActReqRequirement(data);
 			$scope.longRequirement = UniteRequirementService.calculLongActReqRequirement(data);
@@ -303,6 +305,8 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 
 	$scope.right=[];
 	$scope.msg_right = [];
+	$scope.breadcrumb = "";
+
 	AuthentService.formations(
 		{},
 		function(data) {
@@ -327,8 +331,10 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 	if($routeParams.id != "0") {
 		AuthentService.get({id: $routeParams.id},function(data) {
 			$scope.chef = data;
+			$scope.breadcrumb = "Modifier " + data.username;
 		});
 	} else {
+		$scope.breadcrumb = "Création";
 		$scope.chef = {
 		  id: 0,
 		  long_name : "",
