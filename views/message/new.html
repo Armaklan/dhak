@@ -1,0 +1,70 @@
+<ol class="breadcrumb">
+  <li><a href="#">Accueil</a></li>
+  <li class="active">Message</li>
+</ol>
+<div class="pull-right" style="margin-top: -0.5em;">
+  <button class="btn btn-primary" ng-click="ok()">Envoyer</button>
+  <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+</div>
+<div class="row">
+	<div class="col-md-6" style="margin-top: 3.5em;">
+		<fieldset class="titled-box" style="min-height: 200px">
+			<legend>Type de public</legend>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label class="col-md-6 col-md-offset-2">Province</label>
+					<div class="col-md-4">
+						<input type="radio" name="type" value="" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-6 col-md-offset-2">District</label>
+					<div class="col-md-4">
+						<input type="radio" name="type" value="" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-6 col-md-offset-2">Groupe</label>
+					<div class="col-md-4">
+						<input type="radio" name="type" value="" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-6 col-md-offset-2">Unite</label>
+					<div class="col-md-4">
+						<input type="radio" name="type" value="" placeholder="">
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+
+	<div class="col-md-6" style="margin-top: 1.6em;">
+		<fieldset class="titled-box" style="min-height: 227px">
+			<legend>Destinataires</legend>
+	 		<form class="form" role="form">
+		          <div class="form-group">
+		                <select class="form-control"
+		                multiple="multiple"
+		                ng-model="right" 
+		                ui-select2 
+		                ng-options="unite.unite_id as unite.branche_name + ' - ' + unite.province_name + ' - ' + unite.district_name + ' - ' + unite.groupe_name for unite in unites"
+		                >
+		                </select>
+		          </div>
+		          
+		    </form>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12" style="margin-top: 1em;">
+		<fieldset class="titled-box">
+			<legend>Message</legend>
+			<form method="post">
+			  <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+			</form>
+		</fieldset>
+	</div>
+</div>

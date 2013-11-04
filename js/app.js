@@ -1,4 +1,4 @@
-angular.module("DhakModule", ['ngResource', 'ui.select2', 'ui.bootstrap', 'DhakService', 'DhakDirectives'])
+angular.module("DhakModule", ['ngResource', 'ui.select2', 'ui.bootstrap', 'ui.tinymce', 'DhakService', 'DhakDirectives'])
 	.config(['$routeProvider', function($routeProvider) {
 	    $routeProvider.
 	    	when('/login', {templateUrl: 'views/login.html',   controller: UserCtrl, isSecured: false}).
@@ -7,6 +7,7 @@ angular.module("DhakModule", ['ngResource', 'ui.select2', 'ui.bootstrap', 'DhakS
 	    	when('/unite/:id', {templateUrl: 'views/unite/detail.html',   controller: UniteCtrl, isSecured: true}).
 	    	when('/user/list', {templateUrl: 'views/user/list.html',   controller: UserListCtrl, isSecured: true}).
 	    	when('/user/:id', {templateUrl: 'views/user/detail_prv.html',   controller: UserDetailCtrl, isSecured: true}).
+	    	when('/message', {templateUrl: 'views/message/new.html',   controller: MessageCtrl, isSecured: true}).
 	        otherwise({redirectTo: '/dashboard'});
 	}])
 	.run(['$rootScope', 'authenticatedUser', '$location', '$route', 'ActiveUserService', function(root, authenticatedUser, $location, $route, ActiveUserService) {

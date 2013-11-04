@@ -1,15 +1,15 @@
 <ol class="breadcrumb">
   <li><a href="#">Accueil</a></li>
-  <li><a href="#/user/list">Utilisateur</a></li>
+  <li ng-show="admin"><a href="#/user/list">Utilisateur</a></li>
   <li class="active">{{ breadcrumb }}</li>
 </ol>
-<div class="col-md-7" style="margin-top: 4em;">
+<div class="col-md-7" style="margin-top: 2em;">
 
   <fieldset class="titled-box">
   <legend>Données utilisateurs</legend>
   <div class="pull-right fieldset-button">
       <button class="btn btn-primary" ng-click="ok()">OK</button>
-      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
   </div>
   <form class="form-horizontal" role="form">
         <div class="form-group">      
@@ -34,7 +34,7 @@
           <label class="col-md-2" for="inputBirthday">Date de naissance</label>
           <div class="col-md-10">
               <div class="input-append">
-                  <input class="form-control" ng-model="chef.birthday" type="text" value="">
+                  <input class="form-control" ng-model="chef.birthday" type="text" placeholder="dd/mm/yyyy">
               </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
   </form>
   </fieldset>
 </div>
-<div class="col-md-5" style="margin-top: 4em;">
+<div class="col-md-5" style="margin-top: 2em;">
 <fieldset class="titled-box" style="margin-bottom: 20px;" ng-show="chef.id != 0">
     <legend>Mots de passe</legend>
     <div class="pull-right fieldset-button">

@@ -333,11 +333,11 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 	);
 
 	if($routeParams.id == "my") {
+		$scope.admin = false;
+		$scope.target = "/";
 		AuthentService.my({},function(data) {
 			$scope.chef = data;
 			$scope.breadcrumb = "Modifier " + data.username;
-			$scope.admin = false;
-			$scope.target = "/";
 		});
 	} else if($routeParams.id != "0") {
 		AuthentService.get({id: $routeParams.id},function(data) {
@@ -419,4 +419,12 @@ function MenuCtrl($scope, $location, authenticatedUser, AuthentService) {
 		authenticatedUser.targetUrl = "/";
 		$location.path('/login');
 	};
+}
+
+function MessageCtrl($scope, $location) {
+
+	$scope.tinymceOptions = {
+        'height': '300px'
+    };
+
 }

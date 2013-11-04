@@ -79,11 +79,11 @@ dhakService.factory('UniteRequirementService', ['$resource',
       }, 
 
       calculShortActReqRequirement : function(unite) {
-        shortReq = {total: 0,ac: 1,cep1: 0,cep2: 0};
+        shortReq = {total: 0,ac: 1,cep1: 1,cep2: 0};
 
         shortReq.total = parseInt((unite.size -1) / 6) + 1;
         if(unite.size > 12) {
-          shortReq.ac++;
+          shortReq.ac--;
           shortReq.cep1++;
         }
 
