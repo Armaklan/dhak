@@ -77,6 +77,15 @@ $authentController->post('/update_user', function(Request $request) use ($app) {
     return getCorrectResponse($user);
 });
 
+$authentController->post('/update_pwd', function(Request $request) use ($app) {
+    $payload = json_decode($request->getContent());
+    $id = $payload->id;
+    $password = $payload->password;
+    $app['userService']->changePassword($id, $password);
+    return new Response("Mise à jour réussit", 200);
+});
+
+
 $authentController->post('/update_right', function(Request $request) use ($app) {
     $payload = json_decode($request->getContent());
     $app['userService']->addRight($payload->user, $payload->unites);
@@ -85,6 +94,12 @@ $authentController->post('/update_right', function(Request $request) use ($app) 
 
 $authentController->get('/detail', function(Request $request) use ($app) {
     $id = $request->get('id');
+    $user = $app['userService']->getById($id);
+    return getCorrectResponse($user);
+});
+
+$authentController->get('/profil', function(Request $request) use ($app) {
+    $id = $app['session']->get('user')['id'];
     $user = $app['userService']->getById($id);
     return getCorrectResponse($user);
 });

@@ -20,8 +20,10 @@ dhakService.factory('AuthentService', ['$resource',
       create: {method:'POST', isArray: false, params: {action: 'create_user'}},
       update: {method:'POST', isArray: false, params: {action: 'update_user'}},
       get: {method:'GET', isArray: false, params: {action: 'detail'}},
+      my: {method:'GET', isArray: false, params: {action: 'profil'}},
       profils: {method:'GET', isArray: true, params: {action: 'profils'}},
       update_right: {method:'POST', isArray: false, params: {action: 'update_right'}},
+      update_pwd: {method:'POST', isArray: false, params: {action: 'update_pwd'}},
     });
   }
 ]);

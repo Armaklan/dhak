@@ -51,25 +51,24 @@ class UserService {
 		}
 	}
 
-	public function changePassword($request) {
-
-		if($request->get('password') != $request->get('password2')) {
-			throw new Exception("Les mots de passes ne correspondent pas");
-		}
-
+	public function changePassword($id, $password) {
 		$sql = "UPDATE user
 				SET
 					password = :password
-				WHERE username = :username";
+				WHERE id = :id";
 
 		$stmt = $this->db->prepare($sql);
-		$stmt->bindValue("username", $this->session->get('user')['login']);
-		$stmt->bindValue("password", md5($request->get('password')));
+		$stmt->bindValue("id", $id);
+		$stmt->bindValue("password", md5($password));
 		$stmt->execute();
 	}
 
 	public function getByUsername($username) {
-		$sql = "SELECT user.*
+		$sql = "SELECT 
+			user.id, user.username, user.password, user.long_name, user.firstname, 
+			DATE_FORMAT(user.birthday, '%d/%m/%Y') as birthday, user.mail, user.city, user.post_code, 
+			user.adresse, user.tel, user.profil, user.commentaire, 
+			user.formation_lvl
                     FROM user
                     WHERE username = ?";
 	    $user = $this->db->fetchAssoc($sql, array($username));
@@ -77,7 +76,12 @@ class UserService {
 	}
 
     public function getById($id) {
-		$sql = "SELECT * FROM user WHERE id = ?";
+		$sql = "SELECT 
+			user.id, user.username, user.password, user.long_name, user.firstname, 
+			DATE_FORMAT(user.birthday, '%d/%m/%Y') as birthday, user.mail, user.city, user.post_code, 
+			user.adresse, user.tel, user.profil, user.commentaire, 
+			user.formation_lvl
+		FROM user WHERE id = ?";
 	    $user = $this->db->fetchAssoc($sql, array($id));
 	    return $user;
 	}
@@ -89,7 +93,12 @@ class UserService {
 	}
 
 	public function getList() {
-		$sql = "SELECT * FROM user 
+		$sql = "SELECT
+			user.id, user.username, user.password, user.long_name, user.firstname, 
+			DATE_FORMAT(user.birthday, '%d/%m/%Y') as birthday, user.mail, user.city, user.post_code, 
+			user.adresse, user.tel, user.profil, user.commentaire, 
+			user.formation_lvl
+			FROM user 
 			LEFT JOIN asso_unite_user
 			ON user.id = asso_unite_user.user_id
 			WHERE ( profil = 'Chef' 
@@ -212,7 +221,7 @@ class UserService {
 		$sql = "INSERT INTO user (username, password, long_name, firstname, birthday, mail, city, 
 			post_code, adresse, tel, profil, commentaire, formation_lvl)
 			VALUES
-			(:username, :password, :longName, :firstname, STR_TO_DATE(:birthday, '%Y-%m-%d'), :mail, :city, 
+			(:username, :password, :longName, :firstname, STR_TO_DATE(:birthday, '%d/%m/%Y'), :mail, :city, 
 			:postCode, :adresse, :tel, :profil, :commentaire, :formation_lvl) ";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue("username", $user->username);
@@ -239,7 +248,7 @@ class UserService {
 			SET username = :username,
 			long_name = :longName,
 			firstname = :firstname,
-			birthday = STR_TO_DATE(:birthday, '%Y-%m-%d'),
+			birthday = STR_TO_DATE(:birthday, '%d/%m/%Y'),
 			mail = :mail,
 			city = :city,
 			post_code = :postCode,

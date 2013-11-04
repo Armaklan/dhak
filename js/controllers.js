@@ -305,7 +305,11 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 
 	$scope.right=[];
 	$scope.msg_right = [];
+	$scope.msg_mdp = [];
+	$scope.err_mdp = [];
 	$scope.breadcrumb = "";
+	$scope.target = "/user/list";
+	$scope.admin = true;
 
 	AuthentService.formations(
 		{},
@@ -328,7 +332,14 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 		}
 	);
 
-	if($routeParams.id != "0") {
+	if($routeParams.id == "my") {
+		AuthentService.my({},function(data) {
+			$scope.chef = data;
+			$scope.breadcrumb = "Modifier " + data.username;
+			$scope.admin = false;
+			$scope.target = "/";
+		});
+	} else if($routeParams.id != "0") {
 		AuthentService.get({id: $routeParams.id},function(data) {
 			$scope.chef = data;
 			$scope.breadcrumb = "Modifier " + data.username;
@@ -364,11 +375,11 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 
 	$scope.ok = function() {
 		$scope.create_or_update();
-		$location.path("/user/list");
+		$location.path($scope.target);
 	}
 
 	$scope.cancel = function() {
-		$location.path("/user/list");
+		$location.path($scope.target);
 	}
 
 	$scope.ok_right = function() {
@@ -377,13 +388,26 @@ function UserDetailCtrl($scope, $location, $routeParams, AuthentService, UniteSe
 			user:$scope.chef.id,
 			unites:$scope.right
 		}, function() {
-			$scope.msg_right.push("Modification effectué");
+			$scope.err_right.push("Modification effectué");
 		});
 		
 	}
+
+	$scope.change_mdp = function() {
+		if ($scope.password1 != $scope.password2) {
+			$scope.err_mdp.push("Les mots de passe saisis sont différents.");
+		} else if($scope.password1.length < 5) {
+			$scope.err_mdp.push("Les mots de passe doit avoir à minima 5 caractères.");
+		} else {
+			AuthentService.update_pwd({
+				id:$scope.chef.id,
+				password:$scope.password1
+			}, function() {
+				$scope.msg_mdp.push("Mot de passe mis à jour.");
+			})
+		}
+	}
 }
-
-
 
 function MenuCtrl($scope, $location, authenticatedUser, AuthentService) {
 	$scope.user = authenticatedUser;

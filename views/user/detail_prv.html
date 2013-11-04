@@ -33,8 +33,8 @@
         <div class="form-group">
           <label class="col-md-2" for="inputBirthday">Date de naissance</label>
           <div class="col-md-10">
-              <div class="input-append date birthdayPicker">
-                  <input class="form-control" ng-model="chef.birthday" type="text" value="" datepicker-popup="dd/MM/yyyy" show-weeks="false">
+              <div class="input-append">
+                  <input class="form-control" ng-model="chef.birthday" type="text" value="">
               </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
             <input class="form-control" type="text" ng-model="chef.city" placeholder="Ville" class="input-large">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="admin">
           <label class="col-md-2">Profil</label>
           <div class="col-md-10">
               <select class="form-control" 
@@ -102,7 +102,33 @@
   </fieldset>
 </div>
 <div class="col-md-5" style="margin-top: 4em;">
-  <fieldset class="titled-box">
+<fieldset class="titled-box" style="margin-bottom: 20px;" ng-show="chef.id != 0">
+    <legend>Mots de passe</legend>
+    <div class="pull-right fieldset-button">
+      <button class="btn btn-danger" ng-click="change_mdp()">Modifier le mot de passe</button>
+    </div>
+    <form class="form form-horizontal" role="form">
+          <div class="form-group">
+                <label class="col-md-4">Saississez le mot de passe :</label>
+                <div class="col-md-8">
+                  <input class="form-control"type="password" ng-model="password1">
+                </div>
+          </div>
+          <div class="form-group">
+                <label class="col-md-4">Resaississez le à nouveau :</label>
+                <div class="col-md-8">
+                  <input class="form-control" type="password" ng-model="password2">
+                </div>
+          </div>     
+    </form>
+    <div ng-repeat="msg in err_mdp" class="alert alert-danger">
+      {{ msg }}
+    </div>
+    <div ng-repeat="msg in msg_mdp" class="alert alert-success">
+      {{ msg }}
+    </div>
+  </fieldset>
+  <fieldset class="titled-box" ng-show="admin">
     <legend>Droits d'accès</legend>
     <div class="pull-right fieldset-button">
       <button class="btn btn-default" ng-click="ok_right()">Modifier les droits</button>
