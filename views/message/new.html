@@ -2,15 +2,16 @@
   <li><a href="#">Accueil</a></li>
   <li class="active">Message</li>
 </ol>
+<form class="form-horizontal" role="form">
 <div class="pull-right" style="margin-top: -0.5em;">
   <button class="btn btn-primary" ng-click="ok()">Envoyer</button>
   <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
 </div>
+
 <div class="row">
 	<div class="col-md-6" style="margin-top: 3.5em;">
 		<fieldset class="titled-box" style="min-height: 200px">
 			<legend>Type de public</legend>
-			<form class="form-horizontal" role="form">
 				<div class="form-group">
 					<label class="col-md-6 col-md-offset-2">Province</label>
 					<div class="col-md-4">
@@ -35,14 +36,14 @@
 						<input type="radio" name="type" value="" placeholder="">
 					</div>
 				</div>
-			</form>
+
 		</fieldset>
 	</div>
 
 	<div class="col-md-6" style="margin-top: 1.6em;">
 		<fieldset class="titled-box" style="min-height: 227px">
 			<legend>Destinataires</legend>
-	 		<form class="form" role="form">
+			<div class="col-md-10 col-md-offset-1">
 		          <div class="form-group">
 		                <select class="form-control"
 		                multiple="multiple"
@@ -52,8 +53,7 @@
 		                >
 		                </select>
 		          </div>
-		          
-		    </form>
+		    </div>
 		</fieldset>
 	</div>
 </div>
@@ -62,9 +62,16 @@
 	<div class="col-md-12" style="margin-top: 1em;">
 		<fieldset class="titled-box">
 			<legend>Message</legend>
-			<form method="post">
-			  <textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
-			</form>
+				<div class="form-group">
+			  	  	<label class="col-md-1 control-label">Objet </label>
+				  	<div class="col-md-11">
+				   		<input type="text" placeholder="Titre de votre message" class="form-control"/>
+				  	</div>
+				</div>
+				<div class="form-group">
+					<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+				</div>
 		</fieldset>
 	</div>
 </div>
+</form>
