@@ -428,3 +428,55 @@ function MessageCtrl($scope, $location) {
     };
 
 }
+
+function ProjetCampListCtrl($scope, $location, $routeParams, UniteService) {
+	$scope.list_unite = [];
+	$scope.sort = "groupe_name";
+	$scope.reverse = false;
+
+	UniteService.listAccessible([],
+		function(data) {
+			$scope.list_unite = data;
+		}
+	);
+
+	$scope.detail = function(id) {
+		$location.path('camp/' + id);
+	};
+
+}
+
+function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService, UniteService) {
+
+
+	UniteService.get(
+		{id: $routeParams.id},
+		function(data) {
+			$scope.unite = data;
+			$scope.breadcrumb = "Projet de camps " + data.branche_name + " - " + data.groupe_name;
+			$scope.currentRequirement = UniteRequirementService.calculCurrentRequirement(data);
+			$scope.shortRequirement = UniteRequirementService.calculShortActReqRequirement(data);
+			$scope.longRequirement = UniteRequirementService.calculLongActReqRequirement(data);
+
+			UniteService.maitrise(
+				{id: $routeParams.id},
+				function(data) {
+					$scope.maitrise = data;
+					$scope.currentMaitrise = UniteRequirementService.calculCurrentMaitrise(data);
+
+					$scope.checked = {
+						current: UniteRequirementService.checkRequirement($scope.currentMaitrise, $scope.currentRequirement)
+					};
+
+				}, 
+				function() {
+					$scope.errors.push("Impossible de récupérer la maitrise actuelle");
+				}
+			);
+		}, 
+		function() {
+			alert("erreur dans la récuperation des données");
+		}
+	);
+
+}

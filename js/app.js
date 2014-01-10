@@ -8,6 +8,8 @@ angular.module("DhakModule", ['ngResource', 'ui.select2', 'ui.bootstrap', 'ui.ti
 	    	when('/user/list', {templateUrl: 'views/user/list.html',   controller: UserListCtrl, isSecured: true}).
 	    	when('/user/:id', {templateUrl: 'views/user/detail_prv.html',   controller: UserDetailCtrl, isSecured: true}).
 	    	when('/message', {templateUrl: 'views/message/new.html',   controller: MessageCtrl, isSecured: true}).
+	    	when('/camp/list', {templateUrl: 'views/unite/camp_list.html',   controller: ProjetCampListCtrl, isSecured: true}).
+	    	when('/camp/:id', {templateUrl: 'views/unite/camp.html',   controller: ProjetCampCtrl, isSecured: true}).
 	        otherwise({redirectTo: '/dashboard'});
 	}])
 	.run(['$rootScope', 'authenticatedUser', '$location', '$route', 'ActiveUserService', function(root, authenticatedUser, $location, $route, ActiveUserService) {
