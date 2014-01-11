@@ -92,3 +92,17 @@ ADD  `birthday` DATE NULL AFTER  `firstname` ;
 
 ALTER TABLE  `unite` ADD  `nb_sizaine` INT NULL ,
 ADD  `commentaire` LONGTEXT NULL ;
+
+
+
+ALTER TABLE `asso_unite_user` ADD `camp` INT NOT NULL;
+
+
+CREATE TABLE camp (
+	id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	unite_id INT unsigned NOT NULL,
+	duree INT unsigned,
+	distance INT unsigned,
+	lieu VARCHAR(200),
+	FOREIGN KEY (unite_id) REFERENCES unite(id) ON DELETE RESTRICT
+);

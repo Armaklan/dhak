@@ -16,8 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
 
 class MyApplication extends Silex\Application
 {
-    use Application\TwigTrait;
-    use Application\UrlGeneratorTrait;
+
 }
 
 $app = new MyApplication();

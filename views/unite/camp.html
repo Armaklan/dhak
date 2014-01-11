@@ -14,7 +14,7 @@
 <div class="row">
 	<div class="container" style="margin-top: 30px">
 	<div class="pull-right fieldset-button">
-	  <button class="btn btn-primary" ng-click="ok()">OK</button>
+	  <button class="btn btn-primary" ng-click="update()">OK</button>
 	  <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
 	</div>
 		<div class="row">
@@ -65,15 +65,15 @@
 						  <div class="row">
 							  <div class="form-group col-md-2">
 							    <label class="control-label" for="size">Durée du camps :</label>
-							    <input type="text" ng-model="camp.jours" id="size" class="input-mini form-control" name="size" placeholder="En jours...">
+							    <input type="text" ng-model="camp.duree" id="size" class="input-mini form-control" name="duree" placeholder="En jours...">
 							  </div>
 							  <div class="form-group col-md-2 col-md-offset-1">
 							    <label class="control-label" for="nb_sizaine">Distance :</label>
-							    <input type="text" ng-model="camp.distance" id="nb_sizaine" class="input-mini form-control" name="size"  placeholder="En km...">
+							    <input type="text" ng-model="camp.distance" id="nb_sizaine" class="input-mini form-control" name="distance"  placeholder="En km...">
 							  </div>
 							  <div class="form-group col-md-6 col-md-offset-1">
 							    <label class="control-label" for="nb_sizaine">Lieu du Camp :</label>
-							    <input type="text" ng-model="camp.distance" id="nb_sizaine" class="input-mini form-control" name="size">
+							    <input type="text" ng-model="camp.lieu" id="nb_sizaine" class="input-mini form-control" name="lieu">
 							  </div>
 						  </div>
 					</form>
@@ -94,7 +94,7 @@
 								<td>{{ chef.formation_name }}</td>
 								<td>{{chef.adresse}}<br>{{chef.post_code}} {{chef.city}}</td>
 								<td>
-									<center><input type="checkbox" checked="checked"></center>
+									<center><input type="checkbox" ng-model="chef.camp"></center>
 								</td>
 							</tr>
 					</table>

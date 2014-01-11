@@ -446,7 +446,7 @@ function ProjetCampListCtrl($scope, $location, $routeParams, UniteService) {
 
 }
 
-function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService, UniteService) {
+function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService, UniteService, CampService) {
 
 
 	UniteService.get(
@@ -461,6 +461,13 @@ function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService
 			UniteService.maitrise(
 				{id: $routeParams.id},
 				function(data) {
+					angular.forEach(data, function(value, key) {
+						if(value.camp == 0) {
+							value.camp = false;
+						} else {
+							value.camp = true;
+						}
+					});
 					$scope.maitrise = data;
 					$scope.currentMaitrise = UniteRequirementService.calculCurrentMaitrise(data);
 
@@ -473,10 +480,34 @@ function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService
 					$scope.errors.push("Impossible de récupérer la maitrise actuelle");
 				}
 			);
+			CampService.get(
+				{id: $routeParams.id},
+				function(data) {
+					$scope.camp = data;
+				}
+			)
 		}, 
 		function() {
 			alert("erreur dans la récuperation des données");
 		}
 	);
+
+	$scope.update = function() {
+		CampService.update({
+				id:$scope.camp.id,
+				detail: $scope.camp
+			}, function() {
+			
+			}
+		)
+
+		CampService.update_chef({
+				id:$routeParams.id,
+				chefs: $scope.maitrise
+			}, function() {
+			
+			}
+		)
+	}
 
 }

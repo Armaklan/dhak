@@ -99,7 +99,8 @@ $authentController->get('/detail', function(Request $request) use ($app) {
 });
 
 $authentController->get('/profil', function(Request $request) use ($app) {
-    $id = $app['session']->get('user')['id'];
+    $session = $app['session']->get('user');
+    $id = $session['id'];
     $user = $app['userService']->getById($id);
     return getCorrectResponse($user);
 });

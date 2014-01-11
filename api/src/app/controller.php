@@ -11,5 +11,6 @@
 
 require __DIR__.'/../controller/authent.php';
 require __DIR__.'/../controller/maitrise.php';
+require __DIR__.'/../controller/camp.php';
 
 ?>

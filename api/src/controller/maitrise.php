@@ -17,7 +17,8 @@ $maitriseController = $app['controllers_factory'];
 $maitriseController->before($mustBeLogged);
 
 $maitriseController->get('/list', function() use ($app) {
-	$accessibleUnite = $app['userService']->getAccessibleUnite($app['session']->get('user')['id']);
+	$session = $app['session']->get('user');
+	$accessibleUnite = $app['userService']->getAccessibleUnite($session['id']);
 	return getCorrectResponse($accessibleUnite);
 });
 

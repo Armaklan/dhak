@@ -62,6 +62,17 @@ dhakService.factory('UniteService', ['$resource',
   }
 ]);
 
+dhakService.factory('CampService', ['$resource',
+  function($resource){
+
+    return $resource('api/camp/:action', {}, {
+      get: {method:'GET', isArray: false, params: {action: 'detail'}},
+      update: {method:'POST', isArray: false, params: {action: 'update'}},
+      update_chef: {method:'POST', isArray: false, params: {action: 'chef_update'}},
+    });
+  }
+]);
+
 dhakService.factory('UniteRequirementService', ['$resource',
   function(){
 

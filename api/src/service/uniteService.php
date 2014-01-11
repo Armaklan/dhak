@@ -52,7 +52,8 @@ class UniteService {
 					user.id, user.username, user.password, user.long_name, user.firstname, 
 					DATE_FORMAT(user.birthday, '%d/%m/%Y') as birthday, user.mail, user.city, user.post_code, 
 					user.adresse, user.tel, user.profil, user.commentaire, 
-					user.formation_lvl, formation.shortname as formation_name
+					user.formation_lvl, formation.shortname as formation_name,
+					asso.camp as camp
 				FROM user
 				JOIN asso_unite_user asso
 				ON user.id = asso.user_id
