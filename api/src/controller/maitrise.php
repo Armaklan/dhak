@@ -35,8 +35,16 @@ $maitriseController->get('/detail', function(Request $request) use ($app) {
 	return getCorrectResponse($unite);
 });
 
-$maitriseController->get('/chefs', function() use ($app) {
-	$chefs = $app['userService']->getList();
+$maitriseController->get('/chefs', function(Request $request) use ($app) {
+	$app['monolog']->addDebug("Chefs : ");
+	$all = $request->get('all');
+	if($all == 1) {
+		$app['monolog']->addDebug("Chefs All ");
+		$chefs = $app['userService']->getList();
+	} else {
+		$app['monolog']->addDebug("Chefs Dispo ");
+		$chefs = $app['userService']->getDispoList();
+	}
 	return getCorrectResponse($chefs);
 });
 

@@ -105,7 +105,7 @@ function UniteCtrl($scope, $location, $routeParams, $modal, AuthentService, Unit
 	);
 
 	UniteService.chefs(
-		{},
+		{all: 0},
 		function(data) {
 			$scope.list_chef = data;
 		}, 
@@ -446,7 +446,21 @@ function ProjetCampListCtrl($scope, $location, $routeParams, UniteService) {
 
 }
 
-function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService, UniteService, CampService) {
+function ProjetCampCtrl($scope, $location, $routeParams, $modal, AuthentService, UniteRequirementService, UniteService, CampService) {
+
+	$scope.list_chef = [];
+	$scope.renfort = [];
+	$scope.maitrise = [];
+
+	UniteService.chefs(
+		{all: 1},
+		function(data) {
+			$scope.list_chef = data;
+		}, 
+		function() {
+			$scope.errors.push("Impossible de récupérer les chefs disponibles");
+		}
+	);
 
 
 	UniteService.get(
@@ -469,23 +483,32 @@ function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService
 						}
 					});
 					$scope.maitrise = data;
-					$scope.currentMaitrise = UniteRequirementService.calculCurrentMaitrise(data);
 
-					$scope.checked = {
-						current: UniteRequirementService.checkRequirement($scope.currentMaitrise, $scope.currentRequirement)
-					};
+					CampService.maitrise(
+						{id: $routeParams.id},
+						function(data) {
+							$scope.renfort = data;
+							$scope.refreshTab();
+						}, 
+						function() {
+							$scope.errors.push("Impossible de récupérer la maitrise actuelle");
+						}
+					);
 
 				}, 
 				function() {
 					$scope.errors.push("Impossible de récupérer la maitrise actuelle");
 				}
 			);
+
+			
+
 			CampService.get(
 				{id: $routeParams.id},
 				function(data) {
 					$scope.camp = data;
 				}
-			)
+			);
 		}, 
 		function() {
 			alert("erreur dans la récuperation des données");
@@ -508,6 +531,140 @@ function ProjetCampCtrl($scope, $location, $routeParams, UniteRequirementService
 			
 			}
 		)
+
+		$scope.refreshTab();
 	}
+
+	$scope.cancel = function() {
+		$location.path('/camp/list');
+	}
+
+	$scope.technicalAddChef=function(selected) {
+		$scope.renfort.push(selected);
+		$scope.refreshTab();
+
+		$scope.selected_chef = {};
+
+		CampService.maitriseAdd(
+			{id: $routeParams.id,
+			 chef: selected.id},
+			function() {
+			}, 
+			function() {
+				$scope.errors.push("Impossible de modifier la maitrise");
+			}
+		);
+
+		$scope.refreshTab();
+	}
+
+	$scope.addChef=function() {
+		selected = JSON.parse($scope.selected_chef);
+		$scope.technicalAddChef(selected);
+	}
+
+	$scope.detach=function(chef) {
+		var index = $scope.renfort.indexOf(chef);
+		if (index > -1) {
+		    $scope.renfort.splice(index, 1);
+		}
+
+		CampService.maitriseDelete(
+			{id: $routeParams.id,
+			 chef: chef.id},
+			function() {
+			}, 
+			function() {
+				$scope.errors.push("Impossible de modifier la maitrise");
+			}
+		);
+
+		$scope.refreshTab();
+	}
+
+
+	$scope.editUser = function(chef) {
+
+	    var modalInstance = $modal.open({
+	    	templateUrl: 'views/user/modal.html',
+	      	controller: ModalUserCtrl,
+	      	resolve: {
+	        	chef: function () {
+	        		return jQuery.extend({}, chef);
+	        	}
+	      	}
+	    });
+
+	    modalInstance.result.then(function (updatedChef) {
+		    chef.long_name = updatedChef.long_name;
+		    chef.firstname = updatedChef.firstname;
+		    chef.post_code = updatedChef.post_code;
+		    chef.adresse = updatedChef.adresse;
+		    chef.formation_lvl = updatedChef.formation_lvl;
+		    chef.formation_name = updatedChef.formation_name;
+		    chef.city = updatedChef.city;
+		    chef.tel = updatedChef.tel;
+		    chef.birthday = updatedChef.birthday;
+		    chef.mail = updatedChef.mail;
+		    chef.commentaire = updatedChef.commentaire;
+		    chef.profil = updatedChef.profil;
+
+       		AuthentService.update(chef);
+
+       		$scope.refreshTab();
+	    });
+	};
+
+	$scope.createUser = function() {
+
+		chef = {
+		  long_name : "",
+	      firstname : "",
+	      post_code : "",
+	      adresse : "",
+	      formation_lvl : "",
+	      city : "",
+	      tel : "",
+	      birthday : "",
+	      mail : "",
+	      commentaire : "",
+	      profil : "",
+	      password: "",
+	      username: ""
+		};
+	    var modalInstance = $modal.open({
+	    	templateUrl: 'views/user/modal.html',
+	      	controller: ModalUserCtrl,
+	      	resolve: {
+	        	chef: function () {
+	          		return chef;
+	        	}
+	      	}
+	    });
+
+	    modalInstance.result.then(function (updatedChef) {
+	    	updatedChef.username = updatedChef.long_name + updatedChef.firstname;
+
+	    	AuthentService.create(updatedChef, function(data){
+	    		$scope.technicalAddChef(data);
+	    	});
+
+	    });
+	};
+
+	$scope.refreshTab = function() {
+		var chefs = $scope.maitrise.concat($scope.renfort);
+		$scope.currentMaitrise = UniteRequirementService.calculCurrentMaitrise(chefs);
+		if($scope.camp.duree < 5) {
+			$scope.requirement = UniteRequirementService.calculShortActReqRequirement($scope.unite);
+		} else {
+			$scope.requirement = UniteRequirementService.calculLongActReqRequirement($scope.unite);
+		}
+		$scope.checked = {
+			current: UniteRequirementService.checkRequirement($scope.currentMaitrise, $scope.requirement)
+		};	
+
+	}
+
 
 }

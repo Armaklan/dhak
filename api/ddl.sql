@@ -106,3 +106,14 @@ CREATE TABLE camp (
 	lieu VARCHAR(200),
 	FOREIGN KEY (unite_id) REFERENCES unite(id) ON DELETE RESTRICT
 );
+
+CREATE TABLE asso_camp_user (
+	user_id INT unsigned NOT NULL,
+	unite_id INT unsigned NOT NULL,
+	UNIQUE KEY(user_id, unite_id),
+	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY (unite_id) REFERENCES unite(id) ON DELETE CASCADE
+);
+
+ALTER TABLE  `camp`
+ADD  `debut` DATE NULL;

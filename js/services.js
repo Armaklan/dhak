@@ -69,6 +69,9 @@ dhakService.factory('CampService', ['$resource',
       get: {method:'GET', isArray: false, params: {action: 'detail'}},
       update: {method:'POST', isArray: false, params: {action: 'update'}},
       update_chef: {method:'POST', isArray: false, params: {action: 'chef_update'}},
+      maitrise: {method:'GET', isArray: true, params: {action: 'maitrise'}},
+      maitriseAdd: {method:'POST', isArray: false, params: {action: 'maitrise_add'}},
+      maitriseDelete: {method:'POST', isArray: false, params: {action: 'maitrise_delete'}},
     });
   }
 ]);

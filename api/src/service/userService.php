@@ -99,6 +99,19 @@ class UserService {
 			user.adresse, user.tel, user.profil, user.commentaire, 
 			user.formation_lvl
 			FROM user 
+			WHERE ( profil = 'Chef' 
+			or profil='Assistant' )";
+		$users = $this->db->fetchAll($sql, array());
+		return $users;
+	}
+
+	public function getDispoList() {
+		$sql = "SELECT
+			user.id, user.username, user.password, user.long_name, user.firstname, 
+			DATE_FORMAT(user.birthday, '%d/%m/%Y') as birthday, user.mail, user.city, user.post_code, 
+			user.adresse, user.tel, user.profil, user.commentaire, 
+			user.formation_lvl
+			FROM user 
 			LEFT JOIN asso_unite_user
 			ON user.id = asso_unite_user.user_id
 			WHERE ( profil = 'Chef' 
